@@ -163,7 +163,7 @@ body {
 
 /* Scene Factory Improved */
 #scene-factory {
-    background: url('https://img.freepik.com/premium-photo/pixel-art-style-illustration-industrial-factory-interior_933496-33923.jpg') no-repeat center center;
+    background: url('assets/factory_bg.png') no-repeat center center;
     background-size: cover;
     position: relative;
 }

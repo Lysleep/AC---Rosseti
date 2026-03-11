@@ -14,11 +14,11 @@ const Game = {
 
     // Imagens de Referência
     references: [
-        { name: 'Montanhas', url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80' },
+        { name: 'Montanhas', url: 'assets/ref_lake.png' },
         { name: 'Girassóis', url: 'https://images.unsplash.com/photo-1597424216785-447475760331?auto=format&fit=crop&w=600&q=80' },
-        { name: 'Gatinho', url: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80' },
+        { name: 'Gatinho', url: 'assets/ref_zombie.png' },
         { name: 'Floresta', url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80' },
-        { name: 'Deserto', url: 'https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?auto=format&fit=crop&w=600&q=80' }
+        { name: 'Deserto', url: 'assets/ref_desert.png' }
     ],
     currentRefIndex: 0,
 
