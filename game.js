@@ -69,19 +69,28 @@ const Game = {
         const ctx = canvas.getContext('2d');
         let painting = false;
 
+        const getCoordinates = (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            return {
+                x: (e.clientX - rect.left) * scaleX,
+                y: (e.clientY - rect.top) * scaleY
+            };
+        };
+
         const startPosition = (e) => {
             if (!this.gameStarted) return;
-
-            const rect = canvas.getBoundingClientRect();
-            const x = Math.round(e.clientX - rect.left);
-            const y = Math.round(e.clientY - rect.top);
+            const pos = getCoordinates(e);
 
             if (this.currentTool === 'fill') {
-                this.floodFill(x, y);
+                this.floodFill(Math.round(pos.x), Math.round(pos.y));
                 return;
             }
 
             painting = true;
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
             draw(e);
         };
 
@@ -92,24 +101,18 @@ const Game = {
 
         const draw = (e) => {
             if (!painting) return;
-
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            const pos = getCoordinates(e);
 
             ctx.lineWidth = this.brushSize;
             ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
 
-            if (this.currentTool === 'eraser') {
-                ctx.strokeStyle = '#ffffff';
-            } else {
-                ctx.strokeStyle = this.brushColor;
-            }
+            ctx.strokeStyle = (this.currentTool === 'eraser') ? '#ffffff' : this.brushColor;
 
-            ctx.lineTo(x, y);
+            ctx.lineTo(pos.x, pos.y);
             ctx.stroke();
             ctx.beginPath();
-            ctx.moveTo(x, y);
+            ctx.moveTo(pos.x, pos.y);
         };
 
         canvas.addEventListener('mousedown', startPosition);
