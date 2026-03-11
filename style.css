@@ -1,12 +1,8 @@
 :root {
-    --bg-color: #f0e6ef;
-    /* Lavanda pálido */
-    --accent-color: #ff9aa2;
-    /* Rosa pastel */
+    --bg-color: #f7ede2;
+    --accent-color: #f28482;
     --text-color: #4a4e69;
-    --ui-bg: rgba(255, 255, 255, 0.8);
-    --zombie-green: #a8dadc;
-    --boss-color: #bdb2ff;
+    --ui-bg: rgba(255, 255, 255, 0.9);
     --pixel-font: 'Press Start 2P', cursive;
     --main-font: 'Outfit', sans-serif;
 }
@@ -15,17 +11,18 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    cursor: default;
 }
 
 body {
-    background-color: #d8e2dc;
+    background-color: #84a59d;
     font-family: var(--main-font);
     color: var(--text-color);
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 #game-container {
@@ -33,340 +30,223 @@ body {
     height: 768px;
     background-color: var(--bg-color);
     position: relative;
-    border: 8px solid #9a8c98;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-    image-rendering: auto;
+    border: 10px solid #5a5a5a;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
 }
 
-/* UI Layer */
-#ui-layer {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 100;
-    pointer-events: none;
-}
-
-.stat-box {
-    background: var(--ui-bg);
-    padding: 10px 20px;
-    border-radius: 12px;
-    border: 4px solid var(--text-color);
-    font-family: var(--pixel-font);
-    font-size: 14px;
-    pointer-events: all;
-    backdrop-filter: blur(5px);
-}
-
-/* Scenes */
-.scene {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: opacity 0.5s ease;
-}
-
-.hidden {
-    display: none !important;
-    opacity: 0;
-}
-
-/* Intro Screen */
-#intro-screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(74, 78, 105, 0.9);
-    z-index: 2000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(8px);
-}
-
-.modal.large {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    border: 8px solid var(--accent-color);
-    max-width: 600px;
-    width: 90%;
-    text-align: left;
-}
-
-.intro-content p {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-.instruction-box {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 12px;
-    border-left: 6px solid var(--accent-color);
-    margin-bottom: 20px;
-}
-
-.instruction-box h3 {
-    margin-bottom: 15px;
-    font-family: var(--pixel-font);
-    font-size: 12px;
-}
-
-.instruction-box ul {
-    list-style: none;
-}
-
-.instruction-box li {
-    margin-bottom: 10px;
-    position: relative;
-    padding-left: 20px;
-}
-
-.instruction-box li::before {
-    content: '◈';
-    position: absolute;
-    left: 0;
-    color: var(--accent-color);
-}
-
-.target {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #e76f51;
-    text-align: center;
-}
-
-#start-game-btn {
-    width: 100%;
-    padding: 15px;
-    font-family: var(--pixel-font);
-    background: #84a59d;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-#start-game-btn:hover {
-    background: #6a8d85;
-}
-
-/* Scene Factory Improved */
-#scene-factory {
-    background: url('assets/factory_bg.png') no-repeat center center;
-    background-size: cover;
-    position: relative;
-}
-
-#scene-factory::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(240, 230, 239, 0.4);
-    /* Overlay pastel */
-    pointer-events: none;
-}
-
-.zombie {
-    position: absolute;
-    width: 64px;
-    height: 64px;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.npc-bg {
-    background-color: #9eb3c2;
-    /* Placeholder */
-    opacity: 0.6;
-}
-
-.boss {
-    width: 120px;
-    height: 120px;
-    background-color: var(--boss-color);
-    left: 50px;
-    bottom: 200px;
-    border-radius: 50% 50% 20% 20%;
-    border: 4px solid #4a4e69;
-}
-
-#player-desk {
-    position: absolute;
-    right: 100px;
-    bottom: 100px;
-    width: 150px;
-    height: 100px;
-    background-color: #9a8c98;
-    border: 4px solid #4a4e69;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.2s;
-    z-index: 10;
-}
-
-#player-desk:hover {
-    transform: scale(1.05);
-    background-color: #c9ada7;
-}
-
-#player-desk .label {
-    background: white;
-    padding: 5px 10px;
-    border: 2px solid var(--text-color);
-    font-family: var(--pixel-font);
-    font-size: 10px;
-}
-
-/* Scene Workspace */
-#scene-workspace {
-    background-color: #f7ede2;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#workspace-layout {
-    display: flex;
-    gap: 30px;
-    width: 100%;
-    height: 90%;
-}
-
-#reference-panel {
-    flex: 1;
-    background: white;
-    border: 4px dashed #9a8c98;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#reference-image-container {
-    width: 100%;
-    height: 300px;
-    background: #e9ecef;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-#canvas-panel {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-#art-canvas {
-    background: white;
-    cursor: crosshair;
-    border: 4px solid #4a4e69;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-#toolbar {
-    background: var(--ui-bg);
-    padding: 15px;
-    border-radius: 12px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    border: 3px solid #4a4e69;
-}
-
-.tool-group {
-    display: flex;
-    gap: 10px;
-}
-
-.tool-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    border: 3px solid #4a4e69;
-    border-radius: 8px;
-    background: white;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.tool-btn.active {
-    background: var(--accent-color);
-    transform: translateY(-4px);
-    box-shadow: 0 4px 0 #4a4e69;
-}
-
-.action-btn {
-    padding: 10px 20px;
-    font-family: var(--pixel-font);
-    background: #84a59d;
-    color: white;
-    border: 3px solid #4a4e69;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.back-btn {
-    margin-top: 20px;
-    padding: 8px 16px;
-    background: none;
-    border: 2px solid #4a4e69;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-/* Victory Screen */
+/* Telas e Modais */
+#intro-screen,
 #victory-screen {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#victory-screen:not(.hidden) {
-    display: flex !important;
+    backdrop-filter: blur(5px);
 }
 
 .modal {
     background: white;
     padding: 40px;
-    border-radius: 20px;
-    text-align: center;
+    border-radius: 25px;
     border: 8px solid var(--accent-color);
+    max-width: 650px;
+    text-align: center;
 }
 
 .modal h1 {
     font-family: var(--pixel-font);
+    color: var(--accent-color);
+    font-size: 20px;
     margin-bottom: 20px;
-    color: #f28482;
 }
 
-#restart-btn {
-    margin-top: 30px;
+.instruction-box {
+    background: #fdf0d5;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: left;
+    margin: 20px 0;
+}
+
+.instruction-box li {
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+button {
     padding: 15px 30px;
     font-family: var(--pixel-font);
+    font-size: 14px;
     background: #84a59d;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* UI Layer */
+#ui-layer {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    right: 25px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 500;
+    pointer-events: none;
+}
+
+.stat-box {
+    background: var(--ui-bg);
+    padding: 12px 25px;
+    border: 4px solid var(--text-color);
+    border-radius: 15px;
+    font-family: var(--pixel-font);
+    font-size: 14px;
+    pointer-events: auto;
+}
+
+/* Cenas */
+.scene {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#scene-factory {
+    background-image: url('https://img.freepik.com/free-vector/factory-inside-with-machines-conveyors-interior-with-equipment-belts-pipes-manufacturing-production-conveyor-industry-plant-business-concept-illustration_1284-60146.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#player-desk {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    width: 250px;
+    height: 180px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 5px dashed white;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#player-desk::after {
+    content: 'SUA MESA (CLIQUE AQUI)';
+    font-family: var(--pixel-font);
+    color: white;
+    font-size: 10px;
+    text-shadow: 2px 2px black;
+}
+
+/* Workspace */
+#scene-workspace {
+    display: flex;
+    padding: 40px;
+    gap: 30px;
+    align-items: stretch;
+}
+
+#reference-panel {
+    width: 300px;
+    background: white;
+    border: 4px solid var(--text-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#reference-panel h3 {
+    font-family: var(--pixel-font);
+    font-size: 12px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#canvas-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#art-canvas {
+    background: white;
+    border: 6px solid #4a4e69;
+    cursor: crosshair;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+#toolbar {
+    background: var(--ui-bg);
+    padding: 20px;
+    border-radius: 20px;
+    border: 4px solid var(--text-color);
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.tool-group {
+    display: flex;
+    gap: 15px;
+}
+
+.tool-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    background: white;
+    border: 3px solid var(--text-color);
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tool-btn.active {
+    background: var(--accent-color);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#color-picker {
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--text-color);
+    cursor: pointer;
+}
+
+#brush-size {
+    cursor: pointer;
+    width: 120px;
+}
+
+.action-btn {
+    background: #f28482;
+}
+
+.back-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 10px;
 }
