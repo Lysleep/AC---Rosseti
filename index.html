@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zombie Art Studio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@300;400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <!-- Overlay de UI Global -->
+        <div id="ui-layer">
+            <div class="stat-box" id="coins-display">Moedas: <span id="coin-count">200</span></div>
+            <div class="stat-box" id="timer-display">Tempo: <span id="time-left">02:30</span></div>
+        </div>
+
+        <!-- Tela de Vitória -->
+        <div id="victory-screen" class="hidden">
+            <div class="modal">
+                <h1>Objetivo concluído!</h1>
+                <p>Você é o artista zumbi mais produtivo da fábrica!</p>
+                <button id="restart-btn">Iniciar novamente</button>
+            </div>
+        </div>
+
+        <!-- Cena 1: A Fábrica -->
+        <section id="scene-factory" class="scene">
+            <div class="background-zombies">
+                <div class="zombie npc-bg" style="left: 400px; bottom: 100px;"></div>
+                <div class="zombie npc-bg" style="left: 600px; bottom: 100px;"></div>
+                <div class="zombie npc-bg" style="left: 800px; bottom: 100px;"></div>
+            </div>
+
+            <div id="boss-character" class="zombie boss interactive">
+                <div class="speech-bubble hidden" id="boss-bubble">Traga-me arte!</div>
+            </div>
+
+            <div id="player-desk" class="interactive">
+                <div class="label">Sua Mesa</div>
+            </div>
+        </section>
+
+        <!-- Cena 2: Mesa de Trabalho (Canvas de Desenho) -->
+        <section id="scene-workspace" class="scene hidden">
+            <div id="workspace-layout">
+                <div id="reference-panel">
+                    <h3>Referência</h3>
+                    <div id="reference-image-container">
+                        <!-- Imagem de referência será inserida aqui via JS -->
+                        <div class="placeholder-ref">Aguardando referência...</div>
+                    </div>
+                </div>
+
+                <div id="canvas-panel">
+                    <canvas id="art-canvas" width="600" height="450"></canvas>
+                    <div id="toolbar">
+                        <div class="tool-group">
+                            <button id="tool-pencil" class="tool-btn active" title="Lápis">✏️</button>
+                            <button id="tool-marker" class="tool-btn" title="Canetinha">🖊️</button>
+                            <button id="tool-eraser" class="tool-btn" title="Borracha">🧽</button>
+                            <button id="tool-ruler" class="tool-btn" title="Régua">📏</button>
+                        </div>
+                        <div class="tool-group">
+                            <input type="color" id="color-picker" value="#000000">
+                            <input type="range" id="brush-size" min="1" max="50" value="5">
+                        </div>
+                        <button id="btn-deliver" class="action-btn">Entregar Obras</button>
+                    </div>
+                </div>
+            </div>
+            <button id="btn-back-factory" class="back-btn">Voltar para Fábrica</button>
+        </section>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
